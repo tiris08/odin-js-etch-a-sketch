@@ -93,12 +93,12 @@
         
         function newDiv() {
             let squeres = prompt('How many squares per side do you want?');
-                if (squeres > 120) {
-                    squeres = prompt ('but not more than 120, sorry');
+                if (squeres > 120 || squeres !== 'String') {
+                    squeres = prompt ('give us a number but and not more than 120, sorry');
                     if (!squeres) {
                         createDiv(256);
                     }    
-                } else if (!squeres) {
+                } else if (!squeres || squeres !== 'String') {
                     createDiv(256);
                 }
             
