@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>PROJECT: ETCH-A-SKETCH by taras08</title>
+        <link href="https://fonts.googleapis.com/css2?family=MuseoModerno:wght@500&display=swap" rel="stylesheet">
+        <style>
+            p {
+                text-align: right;
+                font-size: 22px;
+                font-family: 'MuseoModerno', cursive;
+                margin-bottom: 0;
+                margin-right: 10px;
+            }
+            html, body {
+                margin: 0;
+                padding: 0;
+            }
+            .tt{
+                padding: 1px;
+            }
+            #color {
+                background: black;
+                transition-duration: 0.4s; 
+            }
+            .container {
+                display: grid;
+                grid-template-columns: repeat(16, 1fr);
+                grid-template-rows: repeat(16, 1fr);
+                width: 500px;
+                height: 500px;
+                border-top: 1px solid black;
+                border-left: 1px solid black;
+                margin: 0% auto ;
+                border-radius: 3px;
+            }
+            .container > div {
+                background:  blanchedalmond;
+                border-bottom: 1px solid black;
+                border-right: 1px solid black;
+            }
+            #btn {
+                margin: 0 50px 25px 50px;
+                text-align: center;
+            }
+            button {
+                margin-top: 0;
+                font-size: large;
+                padding: 10px;
+                background-color: blanchedalmond;
+                border: 1px solid black;
+                border-radius: 3px;
+                transition-duration: 0.4s;
+            }
+            button:hover{
+                background-color: rgb(241, 234, 169);
+                cursor: pointer;
+                box-shadow: 0 6px 8px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+            }
+        </style>
+    </head>
+    <body>
+        <p>Etch a Sketch by taras 08</p>
+        <div id="btn">
+            <button>Reset</button>
+        </div>
+        <div class="container">
+
+        </div>
+    </body>
+    <script>
+        const container = document.querySelector('div.container');
+        const allDivs = document.querySelectorAll('div.container');
+        const button = document.querySelector('button');
+        
+        function createDiv(size) {
+            for (let i=0; i < size; i++ ) {
+                let divs = document.createElement('div');
+                container.appendChild(divs);
+                divs.classList.add('tt')
+                container.style.gridTemplateColumns = `repeat(16, 1fr)`;
+                container.style.gridTemplateRows = `repeat(16, 1fr)`;
+            }
+        }
+        createDiv(256);  
+        
+        function reset() {
+            const col = document.querySelectorAll('.tt')
+            col.forEach((col) => {
+                col.remove();
+            })
+            }
+        
+        function newDiv() {
+            let squeres = prompt('How many squares per side do you want?');
+                if (squeres > 120) {
+                    squeres = prompt ('but not more than 120, sorry');
+                } else if (!squeres) {
+                    createDiv(256)
+                }
+            
+            let mltipleSqueres = squeres * squeres;
+                
+                for (let i=0; i < mltipleSqueres; i++ ) {
+                    let divs = document.createElement('div');
+                    container.appendChild(divs);
+                    divs.classList.add('tt')
+                    container.style.gridTemplateColumns = `repeat(${squeres}, 1fr)`;
+                    container.style.gridTemplateRows = `repeat(${squeres}, 1fr)`;
+                }
+        }
+
+        allDivs.forEach((div) => {
+            div.addEventListener('mouseover', function(e) {
+            e.target.setAttribute('id','color');
+            });   
+        })
+
+        button.addEventListener('click', (e) => {
+            reset();
+            newDiv();
+        })
+
+    </script>
+</html>
+
+
