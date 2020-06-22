@@ -120,11 +120,11 @@
 
         }
 
-        let over = function(e) {
+       allDivs.forEach((div) => {
+            div.addEventListener('mouseover', function(e) {
             e.target.setAttribute('id','color');
-            }
-        allDivs.forEach((div) => div.addEventListener('mouseover', over, false));
-        allDivs.forEach((div) => div.addEventListener( 'touchmove', over, false));
+            });   
+        })
 
         button.addEventListener('click', (e) => {
             reset();
