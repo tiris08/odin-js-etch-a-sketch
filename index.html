@@ -91,17 +91,20 @@
             })
             }
         
-        function newDiv() {
-            let squeres = prompt('How many squares per side do you want?');
-                if (squeres > 120 || squeres !== 'String') {
-                    squeres = prompt ('give us a number but and not more than 120, sorry');
-                    if (!squeres) {
-                        createDiv(256);
-                    }    
-                } else if (!squeres || squeres !== 'String') {
-                    createDiv(256);
-                }
-            
+      function newDiv() {
+            let squeres = ''
+            squeres = prompt('How many squares per side do you want?(any numbers from 2 to 150 are allowed');
+            if (squeres === null) {
+                createDiv(256) 
+            } else if (squeres > 150 || squeres < 2) {
+                alert ('not more than 150!\n' +
+                'not less than 2!');
+                createDiv(256) 
+            }else if (isNaN(squeres)) {
+                alert ('Only numbers are accepted')
+                createDiv(256) 
+            } else if (squeres < 150 || squeres > 1) {
+
             let mltipleSqueres = squeres * squeres;
                 
                 for (let i=0; i < mltipleSqueres; i++ ) {
@@ -111,13 +114,17 @@
                     container.style.gridTemplateColumns = `repeat(${squeres}, 1fr)`;
                     container.style.gridTemplateRows = `repeat(${squeres}, 1fr)`;
                 }
+            } else {
+                createDiv(256)
+            }
+
         }
 
-        allDivs.forEach((div) => {
-            div.addEventListener('mouseover', function(e) {
+        let over = function(e) {
             e.target.setAttribute('id','color');
-            });   
-        })
+            }
+        allDivs.forEach((div) => div.addEventListener('mouseover', over, false));
+        allDivs.forEach((div) => div.addEventListener( 'touchmove', over, false));
 
         button.addEventListener('click', (e) => {
             reset();
